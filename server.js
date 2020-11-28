@@ -31,6 +31,11 @@ app.use(function validateBearerToken(req, res, next) {
 function handleGetMovies(req, res) {
   let response = MOVIEDEX;
 
+  if (req.query.film_title) {
+    response = response.filter((movie) => {
+      return movie.film_title.toLowerCase().includes(req.query.film_title);
+    });
+  }
   if (req.query.genre) {
     response = response.filter((movie) => {
       return movie.genre.toLowerCase().includes(req.query.genre);
